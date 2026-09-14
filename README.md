@@ -12,9 +12,9 @@ An interactive dashboard covering 129 countries, built for the WiD Datathon 2026
 
 A healthy diet costs roughly the same almost everywhere. Across the 129 countries here the median is **$3.88 a day** per person, and the whole range runs from $1.90 to $6.17 in purchasing-power dollars. Yet in some countries virtually nobody can afford one and in others virtually everybody can.
 
-The correlation between what a healthy diet costs and the share of people priced out of it is **−0.01** — effectively zero. Where almost everyone can afford a healthy diet it costs $3.78 a day; where most people are priced out it costs $3.57, very slightly *less*. What separates the two groups is income: a median of $59.16 a day against $4.90.
+The correlation between what a healthy diet costs and the share of people priced out of it is **−0.05** — effectively zero. Where almost everyone can afford a healthy diet it costs $3.21 a day; where most people are priced out it costs $3.57. What separates the two groups is income: a median of $69.12 a day against $4.31.
 
-Food prices are not the story. Wages are. About **2.4 billion people** cannot afford a healthy diet.
+Food prices are not the story. Wages are. About **2.6 billion people** cannot afford a healthy diet.
 
 ## The arithmetic behind the two numbers
 
@@ -25,12 +25,12 @@ Take Ethiopia:
 | | |
 |---|---|
 | A healthy diet costs | **$3.88** a day |
-| You need to earn | **$7.46** a day to buy it |
+| Affordable only above | **$5.17** a day |
 | The typical person earns | **$4.16** a day |
 
-Nobody spends their entire income on food. Rent, fuel, transport and other essentials come first. Food Prices for Nutrition treats **52% of income** as the share available for food, which is roughly what low-income households actually have left. So a $3.88 diet needs $3.88 ÷ 0.52 = $7.46 of income behind it.
+Nobody spends their entire income on food. Rent, fuel, transport and other essentials come first, so a diet becomes unaffordable well before income falls to its price. Food Prices for Nutrition publishes, for each country, the share of people who cannot afford a healthy diet; read against the income distribution, that share puts Ethiopia's affordability line at $5.17 a day.
 
-A median Ethiopian has $2.16 for food and reaches 56% of the diet's cost. That is why 91% of the country — 92 million people — is priced out.
+The typical Ethiopian earns $4.16 and falls $1.01 short. **74.7% of the country — 91.3 million people — cannot afford a healthy diet.** Both figures are FPN's published estimates.
 
 ## The three pages
 
@@ -46,13 +46,13 @@ Every view is linked. Select a country anywhere — dropdown, map, strip, or tab
 
 | Region | Countries | Median priced out |
 |---|---:|---:|
-| Sub-Saharan Africa | 36 | 78% |
-| South Asia | 6 | 44% |
-| Middle East & North Africa | 13 | 22% |
-| Latin America & Caribbean | 18 | 22% |
-| East Asia & Pacific | 11 | 20% |
-| Europe & Central Asia | 43 | 2% |
-| North America | 2 | 1% |
+| Sub-Saharan Africa | 36 | 64% |
+| Latin America & Caribbean | 18 | 28% |
+| South Asia | 6 | 26% |
+| Middle East & North Africa | 13 | 25% |
+| East Asia & Pacific | 11 | 17% |
+| Europe & Central Asia | 43 | 9% |
+| North America | 2 | 4% |
 
 Sample sizes are very uneven. North America is two countries and South Asia is six, so these medians should not be read as precise regional estimates.
 
@@ -73,7 +73,7 @@ Being explicit about this matters, because one of the headline numbers is not ou
 ### Taken from source, unchanged
 
 - Daily cost of a healthy diet and its split across the six food groups
-- **The share and number of people unable to afford a healthy diet** — the percentage on page one is the official Food Prices for Nutrition estimate, not a model output
+- **The share and number of people unable to afford a healthy diet** — `CoHD_headcount` and `CoHD_unafford_n`, matched to each country's survey year. These are FPN's published estimates, not model output. `target.csv` also contains a `cannot_afford` column recomputed from PIP at a flat 52% food share; it diverges from the published series by 10 percentage points on average and **is not used in the dashboard**.
 - Diet cost as a multiple of the poverty line
 - All survey means, Gini coefficients and World Development Indicators
 
@@ -81,7 +81,7 @@ A healthy diet is defined by Food Prices for Nutrition as the least expensive lo
 
 ### Computed by us
 
-**The 52% food share.** Income needed = diet cost ÷ 0.52. We apply the same 52% to every country, so the income threshold is always 1.92× the diet cost. This is the convention underlying the source data's affordability measure, not a country-specific measurement.
+**The affordability line.** FPN publishes the unaffordable *share* but not the income level where it falls. We locate that level by finding the income at which the published share sits in the country's PIP distribution. It is a reading of the published figure against the distribution, not an independent estimate.
 
 **The income distribution and slider.** Microdata is not public, so each country's distribution is reconstructed as a lognormal fitted to its published mean and Gini:
 
