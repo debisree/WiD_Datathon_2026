@@ -1,6 +1,6 @@
-# Out of Reach
+# Priced Out
 
-**What a healthy diet costs, and who can pay for it.**
+**Who can afford a healthy diet?**
 
 An interactive dashboard covering 129 countries, built for the WiD Datathon 2026.
 
