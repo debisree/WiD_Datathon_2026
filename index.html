@@ -114,7 +114,8 @@ input[type=range]{width:100%;accent-color:var(--aub);height:22px}
 #map{margin-top:6px}
 .srcnote{font-size:11px;color:var(--ink3);line-height:1.5;margin:-8px 0 18px;max-width:78ch}
 .srcnote a{color:var(--ink2);text-decoration:underline;text-underline-offset:2px}
-.srcnote code{font-family:var(--font-mono),ui-monospace,monospace;font-size:10.5px;
+.srcnote i{font-style:italic}
+.srcnote code{font-family:ui-monospace,monospace;font-size:10px;
   background:var(--panel);padding:1px 4px;border-radius:2px}
 table{width:100%;border-collapse:collapse;font-size:15.5px}
 th{text-align:left;font-weight:600;font-size:12.5px;color:var(--ink);line-height:1.3;
@@ -143,22 +144,24 @@ tr.sel td{background:var(--panel);font-weight:600}
 .grp-read b{color:var(--aub);font-weight:700}
 
 /* ---------- footer ---------- */
-footer{margin-top:44px;padding:20px 22px;background:var(--panel2);
+footer{margin-top:44px;padding:22px 24px;background:var(--panel2);
   border:1px solid var(--rule);border-radius:2px}
-.srcs{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px 26px;
-  font-size:10.5px;color:var(--ink3);line-height:1.5;align-items:start}
-.srcs p{margin:0 0 5px}
-.fh{font-family:var(--sans);font-size:11px;font-weight:600;color:var(--ink3);
-  margin:0 0 10px;text-transform:none;letter-spacing:.01em}
-.srcs+.fh{margin-top:18px;padding-top:16px;border-top:1px solid var(--rule2)}
-.srcs h4{font-size:10.5px;font-weight:600;color:var(--ink3);margin:0 0 4px}
-.srcs a{color:var(--ink2);text-decoration:underline;text-underline-offset:2px}
-.srcs a:hover{color:var(--ink)}
-.srcs code{font-family:ui-monospace,monospace;font-size:9.5px;background:var(--panel);
-  padding:1px 3px;border-radius:2px}
-.srcs p{margin:0 0 7px}
-.srcs b{color:var(--ink2);font-weight:500}
-.rights{margin-top:16px;padding-top:11px;border-top:1px solid var(--rule2);
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px 34px;align-items:start}
+.fcol{min-width:0}
+.fh{font-family:var(--sans);font-size:10.5px;font-weight:600;color:var(--ink2);
+  letter-spacing:.06em;text-transform:uppercase;margin:0 0 8px;
+  padding-bottom:5px;border-bottom:1px solid var(--rule2)}
+.fcol .fh+ul+.fh{margin-top:16px}
+.fcol ul{list-style:none;margin:0;padding:0}
+.fcol li{font-size:10.5px;line-height:1.55;color:var(--ink3);margin:0 0 7px;
+  padding-left:9px;border-left:1px solid var(--rule2)}
+.fcol li b{color:var(--ink2);font-weight:600}
+.fcol li i{font-style:italic}
+.fcol a{color:var(--ink2);text-decoration:underline;text-underline-offset:2px}
+.fcol a:hover{color:var(--ink)}
+.fcol code{font-family:ui-monospace,monospace;font-size:9.5px;
+  background:var(--panel);padding:1px 3px;border-radius:2px;color:var(--ink2)}
+.rights{margin-top:18px;padding-top:11px;border-top:1px solid var(--rule2);
   display:flex;flex-direction:column;gap:2px}
 .rights span{font-size:9.5px;color:var(--ink3);line-height:1.4}
 .rights .sub{font-size:9px;color:var(--ink3);opacity:.85}
@@ -282,7 +285,7 @@ footer{margin-top:44px;padding:20px 22px;background:var(--panel2);
   <div class="block">
     <h2>Ranked by who is priced out</h2>
     <p class="lede"><b>Priced out</b> means the share of a country&rsquo;s people whose income is too low to afford a healthy diet once non-food essentials are paid for. Click any row to load that country.</p>
-    <p class="srcnote">Diet cost, share priced out and number of people: <a href="https://datacatalog.worldbank.org/search/dataset/0061222/food-prices-for-nutrition-fpn">Food Prices for Nutrition 5.0</a>, World Bank (indicators <code>CoHD_PPP</code>, <code>CoHD_headcount</code>, <code>CoHD_unafford_n</code>), matched to each country&rsquo;s latest survey year. Affordability line derived from World Bank <a href="https://pip.worldbank.org/">PIP</a> income distributions. Licensed CC&nbsp;BY&nbsp;4.0.</p>
+    <p class="srcnote">Source: World Bank, <a href="https://datacatalog.worldbank.org/search/dataset/0061222/food-prices-for-nutrition-fpn"><i>Food Prices for Nutrition</i> 5.0</a> &mdash; <code>CoHD_PPP</code>, <code>CoHD_headcount</code>, <code>CoHD_unafford_n</code>, at each country&rsquo;s reference year. Affordability line derived from World Bank <a href="https://pip.worldbank.org/">PIP</a> distributions. CC&nbsp;BY&nbsp;4.0.</p>
     <div style="margin-bottom:12px">
       <input type="search" id="search" placeholder="Filter by country or region">
     </div>
@@ -303,42 +306,55 @@ footer{margin-top:44px;padding:20px 22px;background:var(--panel2);
 </div>
 
 <footer>
-  <h3 class="fh">Where the data comes from</h3>
-  <div class="srcs">
-    <div>
-      <h4>Cost and affordability of a healthy diet</h4>
-      <p><a href="https://datacatalog.worldbank.org/search/dataset/0061222/food-prices-for-nutrition-fpn">Food Prices for Nutrition 5.0</a>, World Bank, released July 2026. Diet cost per person per day in local currency and 2021 PPP dollars, the cost and share of each food group, the ratio of diet cost to the food component of the international poverty line, and the published share and number of people unable to afford a healthy diet, 2017&ndash;2025. Background methodology at the <a href="https://www.worldbank.org/en/programs/icp/brief/foodpricesfornutrition">Food Prices for Nutrition DataHub</a>. Licensed CC BY 4.0.</p>
-    </div>
-    <div>
-      <h4>Incomes and inequality</h4>
-      <p><a href="https://pip.worldbank.org/">Poverty and Inequality Platform</a>, World Bank. Household survey mean welfare, Gini coefficients and distribution estimates for 172 economies in 2021 PPP dollars. Whether a country reports consumption or income, and the year of its most recent survey, are shown alongside every figure on the affordability page.</p>
-    </div>
-    <div>
-      <h4>Country context</h4>
-      <p><a href="https://databank.worldbank.org/source/world-development-indicators">World Development Indicators</a>, World Bank, for GDP per capita, urban and rural shares, agricultural land, employment and value added, exchange rates and the food production index. <a href="https://www.fao.org/faostat/en/#data/FBS">Food Balance Sheets</a>, FAOSTAT, for production, imports, exports and domestic supply. Region and income-group labels follow the <a href="https://datahelpdesk.worldbank.org/knowledgebase/articles/906519">World Bank classification</a>.</p>
-    </div>
-  </div>
+  <div class="fgrid">
 
-  <h3 class="fh">What is measured and what we assumed</h3>
-  <div class="srcs">
-    <div>
-      <h4>Taken straight from the source, unchanged</h4>
-      <p>The daily cost of a healthy diet and its split across the six food groups. The share and number of people unable to afford a healthy diet &mdash; the headline percentage and headcount are Food Prices for Nutrition&rsquo;s published estimates (<code>CoHD_headcount</code>, <code>CoHD_unafford_n</code>), matched to each country&rsquo;s survey year, not modelled by us. The diet cost as a multiple of the poverty line. Every survey mean, Gini and World Development Indicator.</p>
-      <p>A healthy diet is defined by Food Prices for Nutrition as the least expensive locally available foods meeting national dietary guidelines for one adult at 2,330 kcal a day. It is a price benchmark, not a record of what anyone eats.</p>
-    </div>
-    <div>
-      <h4>Our own steps, and why</h4>
-      <p><b>The affordability line.</b> Food Prices for Nutrition publishes the share of each population that cannot afford a healthy diet, but not the income level where that share falls. We locate it by finding the income at which the published share sits within the country&rsquo;s PIP distribution. It is a reading of the published figure, not a separate estimate, and it moves with the distribution&rsquo;s accuracy.</p>
-      <p><b>The income curve and the slider.</b> Each country&rsquo;s distribution is rebuilt as a lognormal fitted to its published mean and Gini, because the underlying microdata is not public. Checked against the published unaffordability rates it reaches a correlation of 0.999 and an average error of 1.5 percentage points, with a worst case of 5. Read a percentile as a close estimate, not an exact rank; the fit smooths the real shape of the tails.</p>
-      <p><b>Import dependence.</b> Imports divided by domestic supply, computed by us from the Food Balance Sheets.</p>
-      <p><b>One year per country.</b> Where a country has several survey years we show the most recent. The median country&rsquo;s survey is three years old and the oldest is nine, so figures are not all contemporaneous.</p>
-    </div>
-    <div>
-      <h4>Who is missing, and why</h4>
-      <p>129 of roughly 218 economies appear here. A country is included only where diet cost, an income distribution and the context indicators all exist. Food Prices for Nutrition 5.0 withholds PPP diet costs and affordability for Argentina, Myanmar, Somalia, Sudan, Tajikistan and Thailand over unresolved PPP assumptions. Coverage is strongest in Europe, Central Asia and Sub-Saharan Africa and thinnest in East Asia and the Caribbean, so regional medians rest on uneven samples &mdash; North America is two countries and South Asia six.</p>
-    </div>
-  </div>
+    <section class="fcol">
+      <h3 class="fh">Sources</h3>
+      <ul>
+        <li><b>World Bank. 2026. <i>Food Prices for Nutrition</i>, version 5.0.</b> Washington, DC. <a href="https://datacatalog.worldbank.org/search/dataset/0061222/food-prices-for-nutrition-fpn">Data Catalog</a> &middot; <a href="https://www.worldbank.org/en/programs/icp/brief/foodpricesfornutrition">DataHub</a>. CC&nbsp;BY&nbsp;4.0.<br>
+        Indicators used: <code>CoHD_PPP</code>, <code>CoHD_headcount</code>, <code>CoHD_unafford_n</code>, <code>CoHD_pov</code>, and the six food-group series <code>CoHD_*_PPP</code> and <code>CoHD_*_prop</code>.</li>
+        <li><b>World Bank. <i>Poverty and Inequality Platform</i> (PIP).</b> <a href="https://pip.worldbank.org/">pip.worldbank.org</a>.<br>
+        Survey mean welfare, Gini coefficient, welfare type and survey year.</li>
+        <li><b>World Bank. <i>World Development Indicators</i>.</b> <a href="https://databank.worldbank.org/source/world-development-indicators">DataBank</a>.<br>
+        GDP per capita, urban and rural shares, agricultural land, employment and value added, exchange rates, food production index.</li>
+        <li><b>FAO. <i>Food Balance Sheets</i>.</b> <a href="https://www.fao.org/faostat/en/#data/FBS">FAOSTAT</a>.<br>
+        Production, imports, exports and domestic supply.</li>
+        <li>Region and income-group labels follow the <a href="https://datahelpdesk.worldbank.org/knowledgebase/articles/906519">World Bank country classification</a>.</li>
+      </ul>
+    </section>
 
+    <section class="fcol">
+      <h3 class="fh">Definitions</h3>
+      <ul>
+        <li><b>Healthy diet</b> &mdash; the least expensive combination of locally available foods meeting food-based dietary guidelines for one representative adult at 2,330&nbsp;kcal a day. A price benchmark, not a record of consumption.</li>
+        <li><b>Priced out</b> &mdash; the share of a population that cannot afford a healthy diet once non-food essentials are met. FPN&rsquo;s published <code>CoHD_headcount</code>; the headcount beside it is <code>CoHD_unafford_n</code>.</li>
+        <li><b>Dollars</b> &mdash; 2021 purchasing power parity, per person per day. Comparable across countries, not equal to market exchange rates.</li>
+        <li><b>Affordability line</b> &mdash; derived. See Method.</li>
+      </ul>
+
+      <h3 class="fh">Method</h3>
+      <ul>
+        <li><b>Published unchanged.</b> Diet cost, share and number priced out, poverty-line ratio and food-group split are FPN figures, matched to each country&rsquo;s reference year. No modelling.</li>
+        <li><b>Affordability line (derived).</b> FPN publishes the unaffordable share but not the income at which it falls. We locate that income in the country&rsquo;s PIP distribution, modelled as a lognormal fitted to its published mean and Gini. A positional reading of FPN&rsquo;s figure, not an independent estimate.</li>
+        <li><b>Income percentiles (derived).</b> The slider uses the same lognormal. Tested against PIP&rsquo;s own headcounts it gives r&nbsp;=&nbsp;0.999, mean absolute error 1.5&nbsp;pp, maximum 5.1&nbsp;pp. Treat a percentile as a close estimate, not an exact rank.</li>
+        <li><b>Import dependence (derived).</b> Imports divided by domestic supply, from the Food Balance Sheets.</li>
+      </ul>
+    </section>
+
+    <section class="fcol">
+      <h3 class="fh">Coverage and limits</h3>
+      <ul>
+        <li><b>129 of 217 economies.</b> Included only where diet cost, an income distribution and the context indicators all exist.</li>
+        <li><b>Reference years differ.</b> Country figures span 2017&ndash;2025 and are not contemporaneous. The median income survey is 4 years old; the oldest is 9.</li>
+        <li><b>Six countries excluded at source.</b> FPN&nbsp;5.0 withholds PPP diet costs and affordability for Argentina, Myanmar, Somalia, Sudan, Tajikistan and Thailand over unresolved PPP assumptions.</li>
+        <li><b>Regional medians rest on uneven samples</b> &mdash; 43 countries in Europe and Central Asia against 2 in North America and 6 in South Asia.</li>
+        <li><b>Totals are partial.</b> Figures summed across the 129 countries shown, at differing reference years, and are not global estimates.</li>
+        <li><b>One food-group split missing</b> (Iran); nine small states render as points rather than shapes on the map.</li>
+        <li><b>No predictions are shown.</b> An exploratory model of unaffordability was built and discarded: 8 of 128 countries passed its stability check. The repository retains it for transparency.</li>
+      </ul>
+    </section>
+
+  </div>
   <div class="rights">
     <span>&copy;2026 Team Manthan. All rights reserved.</span>
     <span class="sub">Part of the WiD Datathon 2026 submission.</span>
