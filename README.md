@@ -37,6 +37,7 @@ The gap between the first two lines is the point. Rent, fuel and transport come 
 - **Affordability** — headline cost and share priced out; income bars against the affordability line; the whole population as an income distribution, with a slider to place yourself.
 - **What the money buys** — the day's cost split across six food groups, each benchmarked against the 128-country median. Animal-source foods average **28.9%** of diet cost (range 16–52%); oils and fats **4.9%**.
 - **Trends and comparisons** — nine-year price trends against regional peers, the cost-versus-affordability scatter, a choropleth map, a region strip plot, and a ranked table.
+- **Beyond income** — a predicted-versus-measured scatter, an ablation of ten structural explanations, and all 129 countries ranked by residual.
 
 Selecting a country anywhere updates all three pages.
 
@@ -92,17 +93,49 @@ Sample sizes are very uneven; these are not precise regional estimates.
 
 - **Import dependence.** Imports ÷ domestic supply, from the Food Balance Sheets.
 
+- **Income model (page 4).** Logistic fit of the published share on log median income and Gini, scored across ten folds so no country contributes to its own prediction:
+
+  Fitted across **128 countries**. West Bank and Gaza is excluded: it has no Food Balance Sheet, so no import-dependence figure and no complete feature set. The same exclusion applies in `model_frame.csv` and `residuals.csv`. Pages 1–3 report measured values only and retain all 129.
+
+  | Predictors | r | Variance explained | Mean error | Within 10 pp |
+  |---|---:|---:|---:|---:|
+  | Median income + Gini | 0.93 | **87%** | 7.3 pp | 92 / 128 |
+  | Food production + farmland + import dependence | 0.39 | **15%** | 21.3 pp | 32 / 128 |
+
+  Residual = measured − predicted. Positive means more people are priced out than income alone predicts.
+
+- **Ablation.** Each structural variable was added to the income model and rescored out-of-fold (baseline R² = 0.865, n = 128):
+
+  | Added to income + inequality | ΔR² |
+  |---|---:|
+  | Agricultural land, excess over expected | +0.004 |
+  | Agriculture as share of economy | −0.001 |
+  | Food as share of merchandise imports | −0.002 |
+  | Urban share | −0.002 |
+  | Rural share | −0.002 |
+  | Farmland as share of land area | −0.002 |
+  | Food production index | −0.004 |
+  | Import dependence | −0.005 |
+  | Workforce in agriculture | −0.005 |
+  | Exchange-rate volatility | −0.007 |
+
+  **None improved the prediction.** All ten together: R² = 0.849, worse than income alone. The ten without income: R² = 0.672 — most of their apparent explanatory power is income by another name. This is also why the original many-feature model was unstable (8 of 128 countries passed its bootstrap check).
+
 **Not used.** `target.csv` carries a `cannot_afford` column recomputed from PIP at a flat 52% food share. It diverges from FPN's published series by **10.2 pp on average** (maximum 39 pp) and changes the country ranking. The dashboard reports the published series; `cannot_afford` and `gap_vs_published` are retained for transparency.
 
 ## Coverage and limits
 
-- **129 of 217 economies.** Included only where diet cost, an income distribution and the context indicators all exist.
+- **129 of 217 economies** on pages 1–3; **128** on page 4. Included only where diet cost, an income distribution and the context indicators all exist.
 - **Reference years differ**, spanning 2017–2025. Figures are not contemporaneous; the median income survey is 4 years old, the oldest 9.
 - **Six countries excluded at source.** FPN 5.0 withholds PPP diet costs and affordability for Argentina, Myanmar, Somalia, Sudan, Tajikistan and Thailand over unresolved PPP assumptions.
 - **Regional medians rest on uneven samples** — 43 countries in Europe and Central Asia against 2 in North America.
 - **Totals are partial**, summed across the 129 countries shown at differing reference years. Not global estimates.
 - **One food-group split missing** (Iran). Nine small states render as points rather than shapes on the map.
-- **No predicted values appear anywhere.** An exploratory model of unaffordability was built and discarded — 8 of 128 countries passed its stability check. `model_frame.csv` and `residuals.csv` are retained for transparency.
+- **Predictions appear on page 4 only**, always labelled, never substituting for a measured figure. Pages 1–3 are measured throughout.
+- **Page 4 covers 128 countries; pages 1–3 cover 129.** The excluded country is West Bank and Gaza, which lacks a Food Balance Sheet and therefore a complete feature set. Excluding it also matches the set used in `model_frame.csv`, so every diagnostic on this page is computed over the same countries it reports.
+- **Food-group split is 2021 only.** FPN publishes it for that year alone, so page 2 is fixed to 2021 while other pages use each country's reference year.
+- **Headcounts are rounded at source** to 0.1 million; small states below that threshold are reported as "<50k".
+- **A different model was discarded.** `residuals.csv` fits the PIP-recomputed `cannot_afford` series using structural indicators; 8 of 128 countries passed its stability check. It is not used — our residuals are computed against the published series.
 
 ## Repository
 
@@ -123,7 +156,8 @@ README.md
 | `countries.csv` | ISO codes, region, income group, coordinates |
 | `coverage_report.csv` | Source availability matrix |
 | `target.csv` | Assembled country-year panel |
-| `model_frame.csv`, `residuals.csv` | Discarded model and diagnostics |
+| `model_frame.csv` | Assembled modelling panel, 128 countries — defines the modelled set used on page 4 |
+| `residuals.csv` | Earlier model fitted to `cannot_afford`; retained, not used (see Method) |
 
 **Running it.** Open `index.html` in any browser — no build step, no server, no install. Country data, 172 map outlines, both variable fonts and all artwork are embedded; the file makes **no external network requests**.
 
