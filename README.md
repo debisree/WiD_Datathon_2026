@@ -32,7 +32,9 @@ Ethiopia, reference year 2021:
 
 The gap between the first two lines is the point. Rent, fuel and transport come first, so a diet becomes unaffordable well before income falls to its sticker price.
 
-**Three pages.**
+Each page states its own provenance at the top — what is measured, what is derived, and which indicators it draws on. Pages 1–3 show published values; page 4 is explicitly labelled as a modelled result.
+
+**Four pages.**
 
 - **Affordability** — headline cost and share priced out; income bars against the affordability line; the whole population as an income distribution, with a slider to place yourself.
 - **What the money buys** — the day's cost split across six food groups, each benchmarked against the 128-country median. Animal-source foods average **28.9%** of diet cost (range 16–52%); oils and fats **4.9%**.
@@ -65,6 +67,7 @@ Sample sizes are very uneven; these are not precise regional estimates.
   GDP per capita, urban and rural shares, agricultural land, employment and value added, exchange rates, food production index.
 - **FAO. *Food Balance Sheets*.** [FAOSTAT](https://www.fao.org/faostat/en/#data/FBS)
   Production, imports, exports, domestic supply.
+- **Natural Earth.** Public-domain country boundaries, 1:110m, for the map on page 3.
 - Region and income-group labels follow the [World Bank country classification](https://datahelpdesk.worldbank.org/knowledgebase/articles/906519).
 
 ## Definitions
@@ -99,12 +102,12 @@ Sample sizes are very uneven; these are not precise regional estimates.
 
   | Predictors | r | Variance explained | Mean error | Within 10 pp |
   |---|---:|---:|---:|---:|
-  | Median income + Gini | 0.93 | **87%** | 7.3 pp | 92 / 128 |
+  | Median income + Gini | 0.93 | **86%** | 7.3 pp | 92 / 128 |
   | Food production + farmland + import dependence | 0.39 | **15%** | 21.3 pp | 32 / 128 |
 
   Residual = measured − predicted. Positive means more people are priced out than income alone predicts.
 
-- **Ablation.** Each structural variable was added to the income model and rescored out-of-fold (baseline R² = 0.865, n = 128):
+- **Ablation.** Each structural variable was added to the income model and rescored out-of-fold (baseline R² = 0.8645, n = 128):
 
   | Added to income + inequality | ΔR² |
   |---|---:|

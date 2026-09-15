@@ -57,6 +57,22 @@ h2{font-family:var(--serif);font-weight:600;font-size:21px;margin:0 0 5px;
   font-size:12px;padding:6px 9px;border-radius:2px;opacity:0;transition:opacity .12s;
   z-index:20;font-variant-numeric:tabular-nums;max-width:230px}
 
+/* ---------- per-page provenance strip ---------- */
+.prov{border-left:2px solid var(--v);background:var(--panel2);
+  padding:13px 16px;margin:20px 0 4px;display:grid;gap:7px}
+.prov.mod{border-left-color:var(--aub)}
+.pv{display:grid;grid-template-columns:104px 1fr;gap:14px;align-items:baseline}
+.pv .k{font-size:9.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--ink3);line-height:1.6}
+.pv .t{font-size:11.5px;line-height:1.55;color:var(--ink2)}
+.pv .t.meas{color:var(--v);font-weight:600}
+.pv .t.modl{color:var(--aub);font-weight:600}
+.pv .t b{color:var(--ink);font-weight:600}
+.pv .t i{font-style:italic}
+.pv code{font-family:ui-monospace,monospace;font-size:10px;background:var(--panel);
+  padding:1px 4px;border-radius:2px;color:var(--ink2)}
+@media (max-width:640px){.pv{grid-template-columns:1fr;gap:2px}}
+
 /* ---------- page 1 hero ---------- */
 .hero{padding:30px 0 4px;position:relative}
 .sprig{position:absolute;right:0;top:-12px;width:clamp(112px,19vw,224px);height:auto;
@@ -220,6 +236,11 @@ footer{margin-top:44px;padding:22px 24px;background:var(--panel2);
 
 <!-- ============ PAGE 1 ============ -->
 <div class="page on" id="p1" role="tabpanel">
+  <div class="prov">
+    <div class="pv"><span class="k">Showing</span><span class="t meas">Measured values</span></div>
+    <div class="pv"><span class="k">Source</span><span class="t">World Bank, <i>Food Prices for Nutrition</i> 5.0 &mdash; <code>CoHD_PPP</code>, <code>CoHD_headcount</code>, <code>CoHD_unafford_n</code>, <code>CoHD_pov</code>, at each country&rsquo;s reference year. World Bank <i>PIP</i> &mdash; survey mean, Gini, welfare type, year. FAO <i>Food Balance Sheets</i> &mdash; import share.</span></div>
+    <div class="pv"><span class="k">Derived here</span><span class="t">Three things only: the affordability line, the slider percentile, and import share (imports &divide; domestic supply). The published figure is a <i>share</i>, not an income; we locate the income it corresponds to in the country&rsquo;s welfare distribution, modelled as a lognormal fitted to the published mean and Gini. A positional reading of a published number, not an independent estimate. Tested against published headcounts: r&nbsp;=&nbsp;0.999, mean error 1.5&nbsp;pp.</span></div>
+  </div>
   <div class="hero">
     <svg class="sprig" viewBox="0 0 230 300" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M62 300C58 246 64 196 61 132" fill="none"/><path d="M61.0 132.0Q57.7 118.1 45.0 111.5Q48.3 125.4 61.0 132.0Z" fill="none"/><path d="M61.0 132.0Q73.7 125.4 77.0 111.5Q64.3 118.1 61.0 132.0Z" fill="none"/><path d="M61.0 118.5Q57.5 105.3 45.3 99.2Q48.8 112.4 61.0 118.5Z" fill="none"/><path d="M61.0 118.5Q73.2 112.4 76.7 99.2Q64.5 105.3 61.0 118.5Z" fill="none"/><path d="M61.0 105.0Q57.3 92.5 45.6 86.9Q49.3 99.4 61.0 105.0Z" fill="none"/><path d="M61.0 105.0Q72.7 99.4 76.4 86.9Q64.7 92.5 61.0 105.0Z" fill="none"/><path d="M61.0 91.5Q57.2 79.7 45.9 74.5Q49.8 86.3 61.0 91.5Z" fill="none"/><path d="M61.0 91.5Q72.2 86.3 76.1 74.5Q64.8 79.7 61.0 91.5Z" fill="none"/><path d="M61.0 78.0Q57.0 67.0 46.3 62.2Q50.3 73.2 61.0 78.0Z" fill="none"/><path d="M61.0 78.0Q71.7 73.2 75.7 62.2Q65.0 67.0 61.0 78.0Z" fill="none"/><path d="M61.0 64.5Q56.9 54.2 46.8 49.8Q50.8 60.1 61.0 64.5Z" fill="none"/><path d="M61.0 64.5Q71.2 60.1 75.2 49.8Q65.1 54.2 61.0 64.5Z" fill="none"/><path d="M61.0 51.0Q56.9 41.4 47.2 37.3Q51.4 46.9 61.0 51.0Z" fill="none"/><path d="M61.0 51.0Q70.6 46.9 74.8 37.3Q65.1 41.4 61.0 51.0Z" fill="none"/><path d="M61.0 37.5Q56.8 28.6 47.7 24.9Q51.9 33.8 61.0 37.5Z" fill="none"/><path d="M61.0 37.5Q70.1 33.8 74.3 24.9Q65.2 28.6 61.0 37.5Z" fill="none"/><path d="M61.0 19.0Q66.0 7.0 61.0 -5.0Q56.0 7.0 61.0 19.0Z" fill="none"/><path d="M128 300C126 240 132 186 129 140" fill="none"/><circle cx="126.2" cy="137.9" r="2.9" fill="none"/><circle cx="131.7" cy="134.3" r="2.9" fill="none"/><circle cx="129.7" cy="132.9" r="2.8" fill="none"/><circle cx="119.5" cy="130.6" r="2.8" fill="none"/><circle cx="118.3" cy="127.0" r="2.8" fill="none"/><circle cx="118.5" cy="121.8" r="2.8" fill="none"/><circle cx="127.1" cy="123.1" r="2.7" fill="none"/><circle cx="118.9" cy="116.3" r="2.7" fill="none"/><circle cx="132.5" cy="117.5" r="2.7" fill="none"/><circle cx="131.2" cy="111.0" r="2.7" fill="none"/><circle cx="142.9" cy="105.8" r="2.6" fill="none"/><circle cx="139.6" cy="104.1" r="2.6" fill="none"/><circle cx="118.4" cy="99.9" r="2.6" fill="none"/><circle cx="123.3" cy="100.9" r="2.5" fill="none"/><circle cx="119.5" cy="96.4" r="2.5" fill="none"/><circle cx="133.1" cy="92.0" r="2.5" fill="none"/><circle cx="130.4" cy="87.0" r="2.5" fill="none"/><circle cx="116.5" cy="84.7" r="2.4" fill="none"/><circle cx="134.0" cy="82.8" r="2.4" fill="none"/><circle cx="124.0" cy="80.6" r="2.4" fill="none"/><circle cx="127.8" cy="75.8" r="2.4" fill="none"/><circle cx="136.1" cy="75.0" r="2.3" fill="none"/><circle cx="123.2" cy="71.1" r="2.3" fill="none"/><circle cx="129.5" cy="69.8" r="2.3" fill="none"/><circle cx="133.4" cy="63.1" r="2.2" fill="none"/><circle cx="137.4" cy="58.9" r="2.2" fill="none"/><circle cx="127.7" cy="59.6" r="2.2" fill="none"/><circle cx="124.3" cy="54.8" r="2.2" fill="none"/><circle cx="123.7" cy="52.8" r="2.1" fill="none"/><circle cx="131.4" cy="49.0" r="2.1" fill="none"/><circle cx="131.6" cy="44.3" r="2.1" fill="none"/><circle cx="129.9" cy="42.9" r="2.1" fill="none"/><circle cx="129.2" cy="38.9" r="2.0" fill="none"/><circle cx="129.0" cy="38.7" r="2.0" fill="none"/><path d="M192 300C190 248 196 200 191 158" fill="none"/><path d="M191 158C213 152 221 168 200 178C205 166 198 162 191 158Z" fill="none"/><path d="M191 184C169 178 161 194 182 204C177 192 184 188 191 184Z" fill="none"/><path d="M191 210C213 204 221 220 200 230C205 218 198 214 191 210Z" fill="none"/><path d="M191 236C169 230 161 246 182 256C177 244 184 240 191 236Z" fill="none"/><path d="M191 262C213 256 221 272 200 282C205 270 198 266 191 262Z" fill="none"/></g></svg>
     <div class="heroflag" id="heroSym"></div>
@@ -230,7 +251,7 @@ footer{margin-top:44px;padding:22px 24px;background:var(--panel2);
 
   <div class="block">
     <h2 id="whyHead"></h2>
-    <p class="lede">Nobody spends their whole income on food. Rent, fuel, soap and transport come first, so a diet becomes unaffordable well before your whole income drops to its price. Food Prices for Nutrition draws that affordability line for each country; anyone earning below it is counted as unable to afford a healthy diet. Each bar below is one person&rsquo;s daily income measured against it.</p>
+    <p class="lede">Nobody spends their whole income on food. Rent, fuel, soap and transport come first, so a diet becomes unaffordable well before income falls to its price. The line marks where that happens: anyone earning less is counted as unable to afford a healthy diet. Each bar is one person&rsquo;s daily income measured against it.</p>
     <svg id="budget" viewBox="0 0 640 250" width="100%" role="img" aria-label="Daily income split into a food budget and everything else, against the cost of a healthy diet"></svg>
     <p class="callout" id="budgetNote"></p>
     <div class="ctx" id="stats"></div>
@@ -257,9 +278,14 @@ footer{margin-top:44px;padding:22px 24px;background:var(--panel2);
 
 <!-- ============ PAGE 2 ============ -->
 <div class="page" id="p2" role="tabpanel">
+  <div class="prov">
+    <div class="pv"><span class="k">Showing</span><span class="t meas">Measured values &mdash; no modelling on this page</span></div>
+    <div class="pv"><span class="k">Source</span><span class="t">World Bank, <i>Food Prices for Nutrition</i> 5.0 &mdash; <code>CoHD_PPP</code> and the six food-group series <code>CoHD_*_PPP</code> and <code>CoHD_*_prop</code>.</span></div>
+    <div class="pv"><span class="k">Reference year</span><span class="t"><b>2021 for every country.</b> FPN publishes the food-group split for that year alone, so this page is fixed to 2021 while the rest of the dashboard uses each country&rsquo;s own reference year. The comparison marks are the median of the same published series across 128 countries.</span></div>
+  </div>
   <div class="block">
     <h2>What the money buys</h2>
-    <p class="lede">A healthy diet is the cheapest basket of local foods that meets national dietary guidelines. This is how that day&rsquo;s cost divides across the six food groups. Food Prices for Nutrition publishes the split for <b>2021 only</b>, so this page is fixed to that year while the rest of the dashboard uses each country&rsquo;s reference year. Hover any wedge for its price.</p>
+    <p class="lede">A healthy diet is the cheapest basket of local foods that meets national dietary guidelines. This is how that day&rsquo;s cost divides across the six food groups. Hover any wedge for its price.</p>
     <div class="plate-grid">
       <div class="plate-box">
         <svg id="plate" class="plate" viewBox="0 0 300 300" width="100%" style="max-width:300px"
@@ -276,6 +302,11 @@ footer{margin-top:44px;padding:22px 24px;background:var(--panel2);
 
 <!-- ============ PAGE 3 ============ -->
 <div class="page" id="p3" role="tabpanel">
+  <div class="prov">
+    <div class="pv"><span class="k">Showing</span><span class="t meas">Measured values</span></div>
+    <div class="pv"><span class="k">Source</span><span class="t">World Bank, <i>Food Prices for Nutrition</i> 5.0 &mdash; <code>CoHD_PPP</code> 2017&ndash;2025, <code>CoHD_headcount</code>, <code>CoHD_unafford_n</code>. Country boundaries from Natural Earth (public domain).</span></div>
+    <div class="pv"><span class="k">Derived here</span><span class="t">One dashed line only &mdash; the least-squares fit on the cost-against-affordability chart, drawn to show that its slope is near zero. Every plotted point is a published value.</span></div>
+  </div>
   <div class="block">
     <h2>Nine years of food prices</h2>
     <p class="lede">The daily cost of a healthy diet in constant purchasing-power dollars, 2017 to 2025. The selected country is drawn in full; the other countries in its region sit behind it.</p>
@@ -308,7 +339,6 @@ footer{margin-top:44px;padding:22px 24px;background:var(--panel2);
   <div class="block">
     <h2>Ranked by who is priced out</h2>
     <p class="lede"><b>Priced out</b> means the share of a country&rsquo;s people whose income is too low to afford a healthy diet once non-food essentials are paid for. Click any row to load that country.</p>
-    <p class="srcnote">Source: World Bank, <a href="https://datacatalog.worldbank.org/search/dataset/0061222/food-prices-for-nutrition-fpn"><i>Food Prices for Nutrition</i> 5.0</a> &mdash; <code>CoHD_PPP</code>, <code>CoHD_headcount</code>, <code>CoHD_unafford_n</code>, at each country&rsquo;s reference year. Affordability line derived from World Bank <a href="https://pip.worldbank.org/">PIP</a> distributions. CC&nbsp;BY&nbsp;4.0.</p>
     <div style="margin-bottom:12px">
       <input type="search" id="search" placeholder="Filter by country or region">
     </div>
@@ -331,14 +361,16 @@ footer{margin-top:44px;padding:22px 24px;background:var(--panel2);
 
 <!-- ============ PAGE 4 ============ -->
 <div class="page" id="p4" role="tabpanel">
+  <div class="prov mod">
+    <div class="pv"><span class="k">Showing</span><span class="t modl">A modelled result &mdash; predictions, not measurements</span></div>
+    <div class="pv"><span class="k">Measured input</span><span class="t">World Bank, <i>Food Prices for Nutrition</i> 5.0 &mdash; <code>CoHD_headcount</code>. It is the vertical axis below and the &ldquo;measured&rdquo; term in every residual. Predictors come from World Bank <i>PIP</i>; the variables tested against them from <i>World Development Indicators</i> and FAO <i>Food Balance Sheets</i>.</span></div>
+    <div class="pv"><span class="k">Model</span><span class="t">Logistic regression on log median income and Gini, 128 countries, scored across ten folds so no country contributes to its own prediction. r&nbsp;=&nbsp;0.93, R&sup2;&nbsp;=&nbsp;0.86, mean error 7.3&nbsp;pp, 92 of 128 within 10&nbsp;pp. <b>Residual = measured &minus; predicted.</b></span></div>
+  </div>
   <div class="block">
     <h2>What income explains, and what it doesn&rsquo;t</h2>
-    <p class="lede">Sort countries by how much food they grow and affordability barely follows. Sort them by income and it very nearly does. Fitting the share priced out to median income and inequality alone, and scoring only on countries held out of the fit, reproduces <b>87%</b> of the variation between countries. The same exercise using food production, farmland and import dependence reproduces <b>15%</b>.</p>
-    <p class="srcnote" style="margin:-10px 0 16px">This page covers <b>128 countries</b>.</p>
-    <div class="fitrow" id="fitStats"></div>
+    <p class="lede">Sort countries by how much food they grow and affordability barely follows. Sort them by income and it very nearly does. Income and inequality reproduce <b>86%</b> of the variation between countries; food production, farmland and import dependence reproduce <b>15%</b>.</p>
     <p class="lede" style="margin:22px 0 14px">Each circle is a country: what income predicts across the bottom, what was actually measured up the side. The dashed line is where the two agree.</p>
     <svg id="fitScatter" viewBox="0 0 640 400" width="100%" role="img" aria-label="Predicted against measured share priced out"></svg>
-    <p class="srcnote" style="margin-top:12px">Measured values: World Bank, <i>Food Prices for Nutrition</i> 5.0 (<code>CoHD_headcount</code>). Predicted values are ours &mdash; a logistic fit on median income and Gini from World Bank <a href="https://pip.worldbank.org/">PIP</a>, scored out-of-fold across ten folds so no country helps predict itself.</p>
   </div>
 
   <div class="block">
@@ -373,6 +405,7 @@ footer{margin-top:44px;padding:22px 24px;background:var(--panel2);
         GDP per capita, urban and rural shares, agricultural land, employment and value added, exchange rates, food production index.</li>
         <li><b>FAO. <i>Food Balance Sheets</i>.</b> <a href="https://www.fao.org/faostat/en/#data/FBS">FAOSTAT</a>.<br>
         Production, imports, exports and domestic supply.</li>
+        <li><b>Natural Earth.</b> Public-domain country boundaries, 1:110m, used for the map on page 3.</li>
         <li>Region and income-group labels follow the <a href="https://datahelpdesk.worldbank.org/knowledgebase/articles/906519">World Bank country classification</a>.</li>
       </ul>
     </section>
@@ -386,14 +419,6 @@ footer{margin-top:44px;padding:22px 24px;background:var(--panel2);
         <li><b>Affordability line</b> &mdash; derived. See Method.</li>
       </ul>
 
-      <h3 class="fh">Method</h3>
-      <ul>
-        <li><b>Published unchanged.</b> Diet cost, share and number priced out, poverty-line ratio and food-group split are FPN figures, matched to each country&rsquo;s reference year. No modelling.</li>
-        <li><b>Affordability line (derived).</b> FPN publishes the unaffordable share but not the income at which it falls. We locate that income in the country&rsquo;s PIP distribution, modelled as a lognormal fitted to its published mean and Gini. A positional reading of FPN&rsquo;s figure, not an independent estimate.</li>
-        <li><b>Income percentiles (derived).</b> The slider uses the same lognormal. Tested against PIP&rsquo;s own headcounts it gives r&nbsp;=&nbsp;0.999, mean absolute error 1.5&nbsp;pp, maximum 5.1&nbsp;pp. Treat a percentile as a close estimate, not an exact rank.</li>
-        <li><b>Import dependence (derived).</b> Imports divided by domestic supply, from the Food Balance Sheets.</li>
-        <li><b>Income model (derived, page 4).</b> Logistic fit of the published share on log median income and Gini across the 128 modelled countries, scored over ten folds so no country contributes to its own prediction: r&nbsp;=&nbsp;0.93, 87% of variance, mean error 7.3&nbsp;pp, 92 of 128 within 10&nbsp;pp. The same procedure on food production, farmland and import dependence reaches 15%. Residual = measured &minus; predicted.</li>
-      </ul>
     </section>
 
     <section class="fcol">
@@ -405,10 +430,8 @@ footer{margin-top:44px;padding:22px 24px;background:var(--panel2);
         <li><b>Regional medians rest on uneven samples</b> &mdash; 43 countries in Europe and Central Asia against 2 in North America and 6 in South Asia.</li>
         <li><b>Totals are partial.</b> Figures summed across the 129 countries shown, at differing reference years, and are not global estimates.</li>
         <li><b>One food-group split missing</b> (Iran); nine small states render as points rather than shapes on the map.</li>
-        <li><b>Predictions appear on one page only.</b> Pages 1&ndash;3 report measured values throughout. <i>Beyond income</i> shows a prediction from income and inequality, scored out-of-fold, to isolate what income does not explain. It is labelled as such and never substitutes for a measured figure.</li>
         <li><b>The model covers 128 countries, not 129.</b> West Bank and Gaza lacks a Food Balance Sheet and so has no complete feature set; it is excluded from page 4 and retained on pages 1&ndash;3.</li>
         <li><b>A different model was discarded.</b> <code>residuals.csv</code> fits the PIP-recomputed <code>cannot_afford</code> series using structural indicators; 8 of 128 countries passed its stability check. It is not used. Our residuals are computed against the published series.</li>
-        <li><b>Food-group split is 2021 only.</b> FPN publishes it for that year alone, so page 2 is fixed to 2021 while other pages use each country&rsquo;s reference year.</li>
         <li><b>Headcounts are rounded at source</b> to 0.1&nbsp;million; small states showing under 50,000 are reported as such.</li>
       </ul>
     </section>
@@ -836,7 +859,7 @@ document.getElementById("tbody").addEventListener("click",e=>{
 
 /* ============ PAGE 4 ============ */
 /* out-of-fold change in variance explained when each variable is added to
-   the income + inequality model. Baseline R2 = 0.865, n = 128. */
+   the income + inequality model. Baseline R2 = 0.8645, n = 128. */
 const TESTS=[
   ["Agricultural land, excess over expected", .004],
   ["Agriculture as a share of the economy", -.001],
@@ -849,7 +872,7 @@ const TESTS=[
   ["Share of workforce in agriculture", -.005],
   ["Exchange-rate volatility", -.007]
 ];
-const BASE_R2=0.865, ALL_R2=0.849, STRUCT_ONLY_R2=0.672;
+const BASE_R2=0.8645, ALL_R2=0.8491, STRUCT_ONLY_R2=0.6722;
 
 function renderAblate(){
   const svg=document.getElementById("ablate"); svg.innerHTML="";
@@ -886,16 +909,7 @@ function renderAblate(){
 }
 
 function renderFit(){
-  const box=document.getElementById("fitStats");
   const M=DATA.filter(d=>d.resid!=null);
-  const n=M.length, within=M.filter(d=>Math.abs(d.resid)<=0.10).length;
-  const mae=M.reduce((s,d)=>s+Math.abs(d.resid),0)/n;
-  box.innerHTML=[["87%","of the variation explained by income and inequality"],
-    ["15%","explained by food production, farmland and imports"],
-    [within+" of "+n,"countries predicted within 10 points"],
-    [(mae*100).toFixed(1)+" pts","average error, out of fold"]]
-    .map(([a,b])=>`<div><div class="n">${a}</div><div class="l">${b}</div></div>`).join("");
-
   const svg=document.getElementById("fitScatter"); svg.innerHTML="";
   const W=640,H=400,L=52,R=20,T=18,B=44;
   const X=v=>L+v*(W-L-R), Y=v=>H-B-v*(H-T-B);
@@ -980,7 +994,7 @@ function renderPlate(){
   const t2=el("text",{x:cx,y:cy+17,"text-anchor":"middle",fill:css("--ink2"),"font-size":11});
   t2.textContent="a day in 2021, one person"; svg.appendChild(t2);
   document.getElementById("plateCap").textContent=
-    "Wedge size is the share of the day's cost, not the share of food eaten. The food-group split is published for 2021 only.";
+    "Wedge size is the share of the day's cost, not the share of food eaten.";
 }
 function arc(cx,cy,r1,r2,a1,a2){
   const p=(r,a)=>[cx+r*Math.cos(a),cy+r*Math.sin(a)];
