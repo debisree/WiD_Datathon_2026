@@ -6,7 +6,7 @@ An interactive dashboard covering 129 countries. WiD Datathon 2026 — Team Mant
 
 **Live dashboard → https://debisree.github.io/WiD_Datathon_2026/**
 
-**Project presentation → https://www.youtube.com/watch?v=Hnb4VTqJG_Q**
+**Project presentation → https://www.youtube.com/watch?v=LtdlMKUqetE&t=11s**
 
 ---
 
